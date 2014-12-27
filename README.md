@@ -1,5 +1,5 @@
-Time, Clocks and the ordering of events in distrubuted systems
-==============================================================
+Time, Clocks and the ordering of events in a distrubuted system
+===============================================================
 
 A presentation about Leslie Lamport's paper "[Time, Clocks and the ordering of events in a distributed system][lamport]".
 
