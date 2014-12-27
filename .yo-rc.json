@@ -1,0 +1,10 @@
+{
+  "generator-reveal": {
+    "presentationTitle": "Time & Clocks",
+    "packageVersion": "1.0.0",
+    "useSass": false,
+    "deployToGithubPages": true,
+    "githubUsername": "dvberkel",
+    "githubRepository": "time-clocks"
+  }
+}
