@@ -27,9 +27,9 @@ module.exports = (grunt) ->
                 tasks: ['coffeelint']
 
             jshint:
-                files: ['js/*.js']
+                files: ['js/*.js', 'spec/*.js']
                 tasks: ['jshint']
-        
+
         connect:
 
             livereload:
@@ -57,7 +57,7 @@ module.exports = (grunt) ->
             options:
                 jshintrc: '.jshintrc'
 
-            all: ['js/*.js']
+            all: ['js/*.js', 'spec/*.js']
 
         copy:
 
@@ -77,7 +77,7 @@ module.exports = (grunt) ->
                     filter: 'isFile'
                 }]
 
-        
+
         buildcontrol:
 
             options:
@@ -89,7 +89,7 @@ module.exports = (grunt) ->
                 options:
                     remote: 'git@github.com:dvberkel/time-clocks.git'
                     branch: 'gh-pages'
-        
+
 
 
     # Load all grunt tasks.
@@ -137,13 +137,13 @@ module.exports = (grunt) ->
             'copy'
         ]
 
-    
+
     grunt.registerTask 'deploy',
         'Deploy to Github Pages', [
             'dist'
             'buildcontrol'
         ]
-    
+
 
     # Define default task.
     grunt.registerTask 'default', [
