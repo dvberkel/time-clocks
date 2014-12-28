@@ -2,6 +2,7 @@
   "name": "time-clocks",
   "version": "1.0.0",
   "dependencies": {
-    "reveal.js": "~2.6.1"
+    "reveal.js": "~2.6.1",
+    "pdfjs-bower": "~1.0.233"
   }
 }
