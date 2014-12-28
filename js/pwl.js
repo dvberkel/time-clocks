@@ -16,7 +16,19 @@
 	}.bind(this));
     };
 
-    var Process = function(){};
+    var Event = function(){};
+
+    var Process = pwl.Process = function(){
+	Observable.call(this);
+	this.events = [];
+    };
+    Process.prototype = Object.create(Observable.prototype);
+    Process.constructor = Process;
+    Process.prototype.createEvent = function(){
+	var event = new Event(this);
+	this.signal('eventCreated', event);
+	return event;
+    };
 
     var System = pwl.System = function(){
 	Observable.call(this);
@@ -25,7 +37,8 @@
     System.prototype = Object.create(Observable.prototype);
     System.prototype.constructor = System;
     System.prototype.createProcess = function(){
-	var process = this.processes.push(new Process(this));
+	var process = new Process(this);
+	this.processes.push(process);
 	this.signal('processCreated', process);
 	return process;
     };
