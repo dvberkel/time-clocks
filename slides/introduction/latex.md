@@ -1,4 +1,4 @@
-## LaTeX
+![LaTex; a Document Preparation System](image/latex.jpg)
 
 note:
     LaTeX document preparation system that uses TeX and was written in
