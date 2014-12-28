@@ -1,5 +1,11 @@
 [
     "title.md",
     "introduction/leslie-lamport.md",
-    "introduction/latex.md"
+    "introduction/latex.md",
+    {
+	"filename": "introduction/time-clocks.html",
+	"attr": {
+	    "data-state": "pdf"
+	}
+    }
 ]
