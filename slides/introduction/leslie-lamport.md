@@ -1,4 +1,4 @@
-##  Leslie Lamport
+![Leslie Lamport](image/lamport.jpg)
 
 note:
     Leslie Lamport graduated in Mathematics from Massachusetts
