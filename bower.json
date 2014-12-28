@@ -4,5 +4,8 @@
   "dependencies": {
     "reveal.js": "~2.6.1",
     "pdfjs-bower": "~1.0.233"
+  },
+  "devDependencies": {
+    "jasmine": "~2.1.3"
   }
 }
