@@ -3,9 +3,15 @@
     "introduction/leslie-lamport.md",
     "introduction/latex.md",
     {
-	"filename": "introduction/time-clocks.html",
+        "filename": "introduction/time-clocks.html",
+        "attr": {
+            "data-state": "pdf"
+        }
+    },
+    {
+	"filename": "diagram/introduction.html",
 	"attr": {
-	    "data-state": "pdf"
+	    "data-state": "diagram.introduction"
 	}
     }
 ]
