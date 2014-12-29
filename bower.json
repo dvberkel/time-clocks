@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "dependencies": {
     "reveal.js": "~2.6.1",
-    "pdfjs-bower": "~1.0.233"
+    "pdfjs-bower": "~1.0.233",
+    "raphael": "~2.1.2"
   },
   "devDependencies": {
     "jasmine": "~2.1.3"
