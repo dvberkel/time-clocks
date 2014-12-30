@@ -57,7 +57,7 @@
 
 
     var defaultProcessViewOptions = {
-	'width': 5
+	'width': 2
     };
     var ProcessView = function(process, paper, index, options){
 	this.options = extend(options || {}, defaultProcessViewOptions);
@@ -75,7 +75,7 @@
     ProcessView.prototype.line = function(){
 	if (!this._line) {
 	    var line = this._line = this.paper.rect(
-		this.paper.width/2,
+		0,
 		0,
 		this.options.width,
 		this.paper.height
@@ -94,7 +94,11 @@
 
     var defaultSystemViewOptions = {
         'width': 640,
-        'height': 480
+        'height': 480,
+	'fillColor': 'white',
+	'processViewOptions': {
+	    'width': 2
+	}
     };
     var SystemView = pwl.SystemView = function(system, container, options){
 	Observable.call(this);
@@ -117,11 +121,16 @@
             this.options.width, this.options.height
 	);
         background.attr({
-            'fill': 'white'
+            'fill': this.options.fillColor
         });
     };
     SystemView.prototype.createProcessView = function(process){
-	var processView = new ProcessView(process, this.paper, this.processViewCount++);
+	var processView = new ProcessView(
+	    process,
+	    this.paper,
+	    this.processViewCount++,
+	    this.options.processViewOptions
+	);
 	this.on('processViewCreated', processView.updateNumberOfSiblings.bind(processView));
 	this.signal('processViewCreated', this.processViewCount);
     };
