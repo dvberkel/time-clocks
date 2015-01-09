@@ -1,4 +1,4 @@
-/*global window:true, Raphael*/
+/*global window:true, Raphael, console*/
 ;(function(pwl, raphael, undefined){
     /* pwl stands for papers-we-love */
     'use strict';
@@ -26,6 +26,7 @@
     Process.constructor = Process;
     Process.prototype.createEvent = function(){
         var event = new Event(this);
+	this.events.push(event);
         this.signal('eventCreated', event);
         return event;
     };
@@ -56,17 +57,58 @@
     }
 
 
-    var defaultProcessViewOptions = {
-	'width': 2
+    var defaultEventViewOptions = {
+	'radius': 5
     };
-    var ProcessView = function(process, paper, index, options){
-	this.options = extend(options || {}, defaultProcessViewOptions);
-	this.process = process;
+    var EventView = function(event, paper, index, options){
+	this.options = extend(options || {}, defaultEventViewOptions);
+	this.event = event;
 	this.paper = paper;
 	this.index = index;
 	this.total = index + 1;
 	this.update();
     };
+    EventView.prototype.update = function(){
+	var position = (this.index + 1) * this.paper.height / this.total;
+	var circle = this.circle();
+	console.log(position);
+	circle.attr('cy', position);
+    };
+    EventView.prototype.circle = function(){
+	if (!this._circle) {
+	    var circle = this._circle = this.paper.circle(
+		0,
+		0,
+		this.options.radius
+	    );
+	    circle.attr({
+		'fill': 'black'
+	    });
+	}
+	return this._circle;
+    };
+    EventView.prototype.updateNumberOfSiblings = function(total){
+	this.total = total;
+	this.update();
+    };
+
+    var defaultProcessViewOptions = {
+	'width': 2
+    };
+    var ProcessView = function(process, paper, index, options){
+	Observable.call(this);
+	this.options = extend(options || {}, defaultProcessViewOptions);
+	this.process = process;
+	this.paper = paper;
+	this.index = index;
+	this.total = index + 1;
+	this.eventViewCount = 0;
+	this.process.on('eventCreated', function(){console.log('event created');});
+	this.process.on('eventCreated', this.createEventView.bind(this));
+	this.update();
+    };
+    ProcessView.prototype = Object.create(Observable.prototype);
+    ProcessView.prototype.constructor = ProcessView;
     ProcessView.prototype.update = function(){
 	var position = (this.index + 1) * this.paper.width / this.total;
 	var line = this.line();
@@ -89,6 +131,16 @@
     ProcessView.prototype.updateNumberOfSiblings = function(total){
 	this.total = total;
 	this.update();
+    };
+    ProcessView.prototype.createEventView = function(event){
+	var eventView = new EventView(
+	    event,
+	    this.paper,
+	    this.eventViewCount++,
+	    this.options.eventViewOptions
+	);
+	this.on('eventViewCreated', eventView.updateNumberOfSiblings.bind(eventView));
+	this.signal('eventViewCreated', this.eventViewCount);
     };
 
 
@@ -131,6 +183,9 @@
 	    this.processViewCount++,
 	    this.options.processViewOptions
 	);
+	processView.line().click(function(){
+	    this.createEvent();
+	}.bind(process));
 	this.on('processViewCreated', processView.updateNumberOfSiblings.bind(processView));
 	this.signal('processViewCreated', this.processViewCount);
     };
