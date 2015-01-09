@@ -58,6 +58,7 @@
 
 
     var defaultEventViewOptions = {
+	'fill': 'black',
 	'radius': 5
     };
     var EventView = function(event, paper, index, options){
@@ -82,7 +83,7 @@
 		this.options.radius
 	    );
 	    circle.attr({
-		'fill': 'black'
+		'fill': this.options.fill
 	    });
 	}
 	return this._circle;
@@ -93,6 +94,7 @@
     };
 
     var defaultProcessViewOptions = {
+	'fill': 'black',
 	'width': 2
     };
     var ProcessView = function(process, paper, index, options){
@@ -123,7 +125,7 @@
 		this.paper.height
 	    );
 	    line.attr({
-		'fill': 'black'
+		'fill': this.options.fill
 	    });
 	}
 	return this._line;
