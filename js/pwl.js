@@ -26,7 +26,7 @@
     Process.constructor = Process;
     Process.prototype.createEvent = function(){
         var event = new Event(this);
-	this.events.push(event);
+	    this.events.push(event);
         this.signal('eventCreated', event);
         return event;
     };
@@ -58,114 +58,114 @@
 
 
     var defaultEventViewOptions = {
-	'fill': 'black',
-	'radius': 5
+	    'fill': 'black',
+	    'radius': 5
     };
     var EventView = function(event, paper, index, options){
-	this.options = extend(options || {}, defaultEventViewOptions);
-	this.event = event;
-	this.paper = paper;
-	this.index = index;
-	this.total = index + 1;
-	this.update();
+	    this.options = extend(options || {}, defaultEventViewOptions);
+	    this.event = event;
+	    this.paper = paper;
+	    this.index = index;
+	    this.total = index + 1;
+	    this.update();
     };
     EventView.prototype.update = function(cx){
-	cx = cx || 0;
-	var position = (this.index + 1) * this.paper.height / this.total;
-	var circle = this.circle();
-	console.log(position);
-	circle.attr({
-	    'cy': position,
-	    'cx': cx
-	});
+	    cx = cx || 0;
+	    var position = (this.index + 1) * this.paper.height / this.total;
+	    var circle = this.circle();
+	    console.log(position);
+	    circle.attr({
+	        'cy': position,
+	        'cx': cx
+	    });
     };
     EventView.prototype.circle = function(){
-	if (!this._circle) {
-	    var circle = this._circle = this.paper.circle(
-		0,
-		0,
-		this.options.radius
-	    );
-	    circle.attr({
-		'fill': this.options.fill
-	    });
-	}
-	return this._circle;
+	    if (!this._circle) {
+	        var circle = this._circle = this.paper.circle(
+		        0,
+		        0,
+		        this.options.radius
+	        );
+	        circle.attr({
+		        'fill': this.options.fill
+	        });
+	    }
+	    return this._circle;
     };
     EventView.prototype.updateNumberOfSiblings = function(total){
-	this.total = total;
-	this.update();
+	    this.total = total;
+	    this.update();
     };
 
     var defaultProcessViewOptions = {
-	'fill': 'black',
-	'width': 2
+	    'fill': 'black',
+	    'width': 2
     };
     var ProcessView = function(process, paper, index, options){
-	Observable.call(this);
-	this.options = extend(options || {}, defaultProcessViewOptions);
-	this.process = process;
-	this.paper = paper;
-	this.index = index;
-	this.total = index + 1;
-	this.eventViewCount = 0;
-	this.process.on('eventCreated', function(){console.log('event created');});
-	this.process.on('eventCreated', this.createEventView.bind(this));
-	this.update();
+	    Observable.call(this);
+	    this.options = extend(options || {}, defaultProcessViewOptions);
+	    this.process = process;
+	    this.paper = paper;
+	    this.index = index;
+	    this.total = index + 1;
+	    this.eventViewCount = 0;
+	    this.process.on('eventCreated', function(){console.log('event created');});
+	    this.process.on('eventCreated', this.createEventView.bind(this));
+	    this.update();
     };
     ProcessView.prototype = Object.create(Observable.prototype);
     ProcessView.prototype.constructor = ProcessView;
     ProcessView.prototype.update = function(){
-	var position = this.position();
-	var line = this.line();
-	line.attr('x', position);
-	this.signal('x', position);
+	    var position = this.position();
+	    var line = this.line();
+	    line.attr('x', position);
+	    this.signal('x', position);
     };
     ProcessView.prototype.position = function(){
-	return (this.index + 1) * this.paper.width / this.total;
+	    return (this.index + 1) * this.paper.width / this.total;
     };
     ProcessView.prototype.line = function(){
-	if (!this._line) {
-	    var line = this._line = this.paper.rect(
-		0,
-		0,
-		this.options.width,
-		this.paper.height
-	    );
-	    line.attr({
-		'fill': this.options.fill
-	    });
-	}
-	return this._line;
+	    if (!this._line) {
+	        var line = this._line = this.paper.rect(
+		        0,
+		        0,
+		        this.options.width,
+		        this.paper.height
+	        );
+	        line.attr({
+		        'fill': this.options.fill
+	        });
+	    }
+	    return this._line;
     };
     ProcessView.prototype.updateNumberOfSiblings = function(total){
-	this.total = total;
-	this.update();
+	    this.total = total;
+	    this.update();
     };
     ProcessView.prototype.createEventView = function(event){
-	var eventView = new EventView(
-	    event,
-	    this.paper,
-	    this.eventViewCount++,
-	    this.options.eventViewOptions
-	);
-	eventView.update(this.position());
-	this.on('eventViewCreated', eventView.updateNumberOfSiblings.bind(eventView));
-	this.on('x', eventView.update.bind(eventView));
-	this.signal('eventViewCreated', this.eventViewCount);
+	    var eventView = new EventView(
+	        event,
+	        this.paper,
+	        this.eventViewCount++,
+	        this.options.eventViewOptions
+	    );
+	    eventView.update(this.position());
+	    this.on('eventViewCreated', eventView.updateNumberOfSiblings.bind(eventView));
+	    this.on('x', eventView.update.bind(eventView));
+	    this.signal('eventViewCreated', this.eventViewCount);
     };
 
 
     var defaultSystemViewOptions = {
         'width': 640,
         'height': 480,
-	'fillColor': 'white',
-	'processViewOptions': {
-	    'width': 2
-	}
+	    'fillColor': 'white',
+	    'processViewOptions': {
+	        'width': 2
+	    }
     };
     var SystemView = pwl.SystemView = function(system, container, options){
-	Observable.call(this);
+	    Observable.call(this);
         this.options = extend(options || {}, defaultSystemViewOptions);
         this.system = system;
         this.paper = raphael(
@@ -173,8 +173,8 @@
             this.options.width,
             this.options.height
         );
-	this.processViewCount = 0;
-	this.system.on('processCreated', this.createProcessView.bind(this));
+	    this.processViewCount = 0;
+	    this.system.on('processCreated', this.createProcessView.bind(this));
         this.initialize();
     };
     SystemView.prototype = Object.create(Observable.prototype);
@@ -183,22 +183,22 @@
         var background = this.paper.rect(
             0, 0,
             this.options.width, this.options.height
-	);
+	    );
         background.attr({
             'fill': this.options.fillColor
         });
     };
     SystemView.prototype.createProcessView = function(process){
-	var processView = new ProcessView(
-	    process,
-	    this.paper,
-	    this.processViewCount++,
-	    this.options.processViewOptions
-	);
-	processView.line().click(function(){
-	    this.createEvent();
-	}.bind(process));
-	this.on('processViewCreated', processView.updateNumberOfSiblings.bind(processView));
-	this.signal('processViewCreated', this.processViewCount);
+	    var processView = new ProcessView(
+	        process,
+	        this.paper,
+	        this.processViewCount++,
+	        this.options.processViewOptions
+	    );
+	    processView.line().click(function(){
+	        this.createEvent();
+	    }.bind(process));
+	    this.on('processViewCreated', processView.updateNumberOfSiblings.bind(processView));
+	    this.signal('processViewCreated', this.processViewCount);
     };
 })(window.pwl = window.pwl || {}, Raphael);
