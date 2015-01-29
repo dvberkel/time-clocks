@@ -69,11 +69,15 @@
 	this.total = index + 1;
 	this.update();
     };
-    EventView.prototype.update = function(){
+    EventView.prototype.update = function(cx){
+	cx = cx || 0;
 	var position = (this.index + 1) * this.paper.height / this.total;
 	var circle = this.circle();
 	console.log(position);
-	circle.attr('cy', position);
+	circle.attr({
+	    'cy': position,
+	    'cx': cx
+	});
     };
     EventView.prototype.circle = function(){
 	if (!this._circle) {
@@ -112,9 +116,13 @@
     ProcessView.prototype = Object.create(Observable.prototype);
     ProcessView.prototype.constructor = ProcessView;
     ProcessView.prototype.update = function(){
-	var position = (this.index + 1) * this.paper.width / this.total;
+	var position = this.position();
 	var line = this.line();
 	line.attr('x', position);
+	this.signal('x', position);
+    };
+    ProcessView.prototype.position = function(){
+	return (this.index + 1) * this.paper.width / this.total;
     };
     ProcessView.prototype.line = function(){
 	if (!this._line) {
@@ -141,7 +149,9 @@
 	    this.eventViewCount++,
 	    this.options.eventViewOptions
 	);
+	eventView.update(this.position());
 	this.on('eventViewCreated', eventView.updateNumberOfSiblings.bind(eventView));
+	this.on('x', eventView.update.bind(eventView));
 	this.signal('eventViewCreated', this.eventViewCount);
     };
 
