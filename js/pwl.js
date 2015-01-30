@@ -16,7 +16,49 @@
         }.bind(this));
     };
 
-    var Event = function(){};
+    var IdGenerator = function(){
+        this.nextId = 0;
+    };
+    IdGenerator.prototype.next = function(){
+        return this.nextId++;
+    };
+
+    var eventIdGenerator = new IdGenerator();
+
+    var Event = function(){
+        this.id = eventIdGenerator.next();
+        this.to = [];
+        this.from = [];
+    };
+    Event.prototype.sendMessageTo = function(event) {
+        console.log('connecting ' + this.id + ' and ' + event.id);
+        this.to.push(event);
+        event.from.push(this);
+    };
+
+    var Connector = function(){
+        this.reset();
+    };
+    Connector.prototype.register = function(event) {
+        if (this.events.length < 2) {
+            this.events.push(event);
+        }
+        if (this.events.length === 2) {
+            this.connect();
+        }
+    };
+    Connector.prototype.reset = function(){
+        this.events = [];
+    };
+    Connector.prototype.connect = function(){
+        if (this.events.length !== 2){
+            throw new Error('unable to connect ' + this.events.length + '%s events');
+        }
+        this.events[0].sendMessageTo(this.events[1]);
+        this.reset();
+    };
+
+    var connector = pwl.connector = new Connector();
 
     var Process = pwl.Process = function(){
         Observable.call(this);
@@ -155,6 +197,9 @@
 	        this.options.eventViewOptions
 	    );
         eventView.updateCx(this.position());
+        eventView.circle().click(function(){
+            connector.register(this.event);
+        }.bind(eventView));
 	    this.on('eventViewCreated', eventView.updateNumberOfSiblings.bind(eventView));
 	    this.on('x', eventView.updateCx.bind(eventView));
 	    this.signal('eventViewCreated', this.eventViewCount);
