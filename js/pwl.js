@@ -101,7 +101,9 @@
         return result;
     }
 
-    var defaultMessageViewOptions = {};
+    var defaultMessageViewOptions = {
+        'dasharray': ['--..']
+    };
     var MessageView = function(origin, target, paper, options){
         this.options = extend(options || {}, defaultMessageViewOptions);
         this.origin = origin;
@@ -120,6 +122,7 @@
             'M', o.attr('cx'), ',', o.attr('cy'),
             'L', t.attr('cx'), ',', t.attr('cy')
         ]);
+        this._line.attr('stroke-dasharray', this.options.dasharray);
     };
 
     var lookupEventView = {};
