@@ -1,4 +1,4 @@
-/*global window:true, Raphael, console*/
+/*global window:true, Raphael*/
 ;(function(pwl, raphael, undefined){
     /* pwl stands for papers-we-love */
     'use strict';
@@ -75,7 +75,7 @@
         this.update();
     };
     EventView.prototype.update = function(){
-	    var position = (this.index + 1) * this.paper.height / this.total;
+	    var position = (this.index + 0.5) * this.paper.height / this.total;
 	    var circle = this.circle();
 	    circle.attr({
 	        'cy': position,
