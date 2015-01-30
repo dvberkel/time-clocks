@@ -1,4 +1,4 @@
-/*global window:true, Raphael*/
+/*global window:true, Raphael, console*/
 ;(function(pwl, raphael, undefined){
     /* pwl stands for papers-we-love */
     'use strict';
@@ -67,15 +67,19 @@
 	    this.paper = paper;
 	    this.index = index;
 	    this.total = index + 1;
+        this.cx = 0;
 	    this.update();
     };
-    EventView.prototype.update = function(cx){
-	    cx = cx || 0;
+    EventView.prototype.updateCx = function(cx){
+        this.cx = cx;
+        this.update();
+    };
+    EventView.prototype.update = function(){
 	    var position = (this.index + 1) * this.paper.height / this.total;
 	    var circle = this.circle();
 	    circle.attr({
 	        'cy': position,
-	        'cx': cx
+	        'cx': this.cx
 	    });
     };
     EventView.prototype.circle = function(){
@@ -147,9 +151,9 @@
 	        this.eventViewCount++,
 	        this.options.eventViewOptions
 	    );
-	    eventView.update(this.position());
+        eventView.updateCx(this.position());
 	    this.on('eventViewCreated', eventView.updateNumberOfSiblings.bind(eventView));
-	    this.on('x', eventView.update.bind(eventView));
+	    this.on('x', eventView.updateCx.bind(eventView));
 	    this.signal('eventViewCreated', this.eventViewCount);
     };
 
