@@ -10,6 +10,10 @@
         }
     });
 
+    Reveal.addEventListener('slidechanged', function(){
+        pwl.connector.reset();
+    });
+
     var isRendered = { /* used to keep track of which slides are already rendered */ };
     Reveal.addEventListener('diagram.introduction', function(event){
 	    if (!isRendered[event.type]) {
