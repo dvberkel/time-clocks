@@ -1,4 +1,4 @@
-/*global window:true, Raphael, console*/
+/*global window:true, Raphael*/
 ;(function(pwl, raphael, undefined){
     /* pwl stands for papers-we-love */
     'use strict';
@@ -73,7 +73,6 @@
 	    cx = cx || 0;
 	    var position = (this.index + 1) * this.paper.height / this.total;
 	    var circle = this.circle();
-	    console.log(position);
 	    circle.attr({
 	        'cy': position,
 	        'cx': cx
@@ -109,7 +108,6 @@
 	    this.index = index;
 	    this.total = index + 1;
 	    this.eventViewCount = 0;
-	    this.process.on('eventCreated', function(){console.log('event created');});
 	    this.process.on('eventCreated', this.createEventView.bind(this));
 	    this.update();
     };
@@ -122,7 +120,7 @@
 	    this.signal('x', position);
     };
     ProcessView.prototype.position = function(){
-	    return (this.index + 1) * this.paper.width / this.total;
+	    return (this.index + 0.5) * this.paper.width / this.total;
     };
     ProcessView.prototype.line = function(){
 	    if (!this._line) {
@@ -196,8 +194,8 @@
 	        this.options.processViewOptions
 	    );
 	    processView.line().click(function(){
-	        this.createEvent();
-	    }.bind(process));
+	        this.process.createEvent();
+	    }.bind(processView));
 	    this.on('processViewCreated', processView.updateNumberOfSiblings.bind(processView));
 	    this.signal('processViewCreated', this.processViewCount);
     };
