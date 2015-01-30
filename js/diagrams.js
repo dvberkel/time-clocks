@@ -3,6 +3,13 @@
     'use strict';
     var system = new pwl.System();
 
+    var r = 114;
+    document.body.addEventListener('keypress', function(event){
+        if (event.charCode === r) {
+            pwl.connector.reset();
+        }
+    });
+
     var isRendered = { /* used to keep track of which slides are already rendered */ };
     Reveal.addEventListener('diagram.introduction', function(event){
 	    if (!isRendered[event.type]) {
