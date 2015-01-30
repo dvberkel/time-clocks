@@ -59,7 +59,8 @@
 
     var defaultEventViewOptions = {
 	    'fill': 'black',
-	    'radius': 5
+	    'radius': 5,
+        'offset': 0.5
     };
     var EventView = function(event, paper, index, options){
 	    this.options = extend(options || {}, defaultEventViewOptions);
@@ -75,7 +76,7 @@
         this.update();
     };
     EventView.prototype.update = function(){
-	    var position = (this.index + 0.5) * this.paper.height / this.total;
+	    var position = (this.index + this.options.offset) * this.paper.height / this.total;
 	    var circle = this.circle();
 	    circle.attr({
 	        'cy': position,
@@ -102,7 +103,9 @@
 
     var defaultProcessViewOptions = {
 	    'fill': 'black',
-	    'width': 2
+	    'width': 2,
+        'offset': 0.5,
+        'eventViewOptions': defaultEventViewOptions
     };
     var ProcessView = function(process, paper, index, options){
 	    Observable.call(this);
@@ -124,7 +127,7 @@
 	    this.signal('x', position);
     };
     ProcessView.prototype.position = function(){
-	    return (this.index + 0.5) * this.paper.width / this.total;
+	    return (this.index + this.options.offset) * this.paper.width / this.total;
     };
     ProcessView.prototype.line = function(){
 	    if (!this._line) {
@@ -162,9 +165,7 @@
         'width': 640,
         'height': 480,
 	    'fillColor': 'white',
-	    'processViewOptions': {
-	        'width': 2
-	    }
+	    'processViewOptions': defaultProcessViewOptions
     };
     var SystemView = pwl.SystemView = function(system, container, options){
 	    Observable.call(this);
