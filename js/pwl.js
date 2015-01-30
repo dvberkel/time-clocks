@@ -153,7 +153,7 @@
         this.update();
     };
     EventView.prototype.position = function(){
-	    return (this.index + this.options.offset) * this.paper.height / this.total;
+	    return (1 - (this.index + this.options.offset)/this.total) * this.paper.height;
     };
     EventView.prototype.update = function(){
         var position = this.position();

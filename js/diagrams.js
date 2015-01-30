@@ -35,15 +35,15 @@
             var p = system.createProcess();
             var q = system.createProcess();
 
+            var p1 = p.createEvent();
             p.createEvent();
             p.createEvent();
-            var p3 = p.createEvent();
 
+            var q1 = q.createEvent();
             q.createEvent();
-            var q2 = q.createEvent();
 
-            pwl.connector.register(p3);
-            pwl.connector.register(q2);
+            pwl.connector.register(p1);
+            pwl.connector.register(q1);
         }
     });
 
