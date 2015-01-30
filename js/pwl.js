@@ -152,8 +152,11 @@
         this.cx = cx;
         this.update();
     };
+    EventView.prototype.position = function(){
+	    return (this.index + this.options.offset) * this.paper.height / this.total;
+    };
     EventView.prototype.update = function(){
-	    var position = (this.index + this.options.offset) * this.paper.height / this.total;
+        var position = this.position();
 	    var circle = this.circle();
 	    circle.attr({
 	        'cy': position,
