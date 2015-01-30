@@ -1,4 +1,4 @@
-/*global document, Reveal, pwl*/
+/*global window, document, Reveal, pwl*/
 ;(function(Reveal, pwl){
     'use strict';
     var system = new pwl.System();
@@ -17,4 +17,6 @@
 	        new pwl.SystemView(system, container, { width: 640, height: 480 });
 	    }
     });
+
+    window.system = system;
 })(Reveal, pwl);
