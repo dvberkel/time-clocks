@@ -29,5 +29,23 @@
 	    }
     });
 
+    var e = 101;
+    document.body.addEventListener('keypress', function(event){
+        if (event.charCode === e) {
+            var p = system.createProcess();
+            var q = system.createProcess();
+
+            p.createEvent();
+            p.createEvent();
+            var p3 = p.createEvent();
+
+            q.createEvent();
+            var q2 = q.createEvent();
+
+            pwl.connector.register(p3);
+            pwl.connector.register(q2);
+        }
+    });
+
     window.system = system;
 })(Reveal, pwl);
