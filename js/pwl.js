@@ -109,6 +109,9 @@
         this.origin = origin;
         this.target = target;
         this.paper = paper;
+        var boundUpdate = this.update.bind(this);
+        this.origin.on('moved', boundUpdate);
+        this.target.on('moved', boundUpdate);
         this.update();
     };
     MessageView.prototype.update = function(){
@@ -132,6 +135,7 @@
         'offset': 0.5
     };
     var EventView = function(event, paper, index, options){
+        Observable.call(this);
         lookupEventView[event.id] = this;
 	    this.options = extend(options || {}, defaultEventViewOptions);
 	    this.event = event;
@@ -142,6 +146,8 @@
 	    this.update();
         this.event.on('messaged',this.createMessageView.bind(this));
     };
+    EventView.prototype = Object.create(Observable.prototype);
+    EventView.prototype.constructor = EventView;
     EventView.prototype.updateCx = function(cx){
         this.cx = cx;
         this.update();
@@ -153,6 +159,7 @@
 	        'cy': position,
 	        'cx': this.cx
 	    });
+        this.signal('moved');
     };
     EventView.prototype.circle = function(){
 	    if (!this._circle) {
