@@ -198,8 +198,10 @@
 	        this.processViewCount++,
 	        this.options.processViewOptions
 	    );
-	    processView.line().click(function(){
-	        this.process.createEvent();
+	    processView.line().click(function(event){
+            if (event.altKey) {
+	            this.process.createEvent();
+            }
 	    }.bind(processView));
 	    this.on('processViewCreated', processView.updateNumberOfSiblings.bind(processView));
 	    this.signal('processViewCreated', this.processViewCount);
