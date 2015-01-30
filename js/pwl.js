@@ -1,4 +1,4 @@
-/*global window:true, Raphael*/
+/*global window:true, Raphael, console*/
 ;(function(pwl, raphael, undefined){
     /* pwl stands for papers-we-love */
     'use strict';
@@ -199,7 +199,7 @@
 	        this.options.processViewOptions
 	    );
 	    processView.line().click(function(event){
-            if (event.altKey) {
+            if (event.metaKey) {
 	            this.process.createEvent();
             }
 	    }.bind(processView));
