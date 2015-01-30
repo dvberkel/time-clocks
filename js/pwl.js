@@ -1,4 +1,4 @@
-/*global window:true, Raphael, console*/
+/*global window:true, Raphael*/
 ;(function(pwl, raphael, undefined){
     /* pwl stands for papers-we-love */
     'use strict';
@@ -26,14 +26,17 @@
     var eventIdGenerator = new IdGenerator();
 
     var Event = function(){
+        Observable.call(this);
         this.id = eventIdGenerator.next();
         this.to = [];
         this.from = [];
     };
+    Event.prototype = Object.create(Observable.prototype);
+    Event.prototype.constructor = Event;
     Event.prototype.sendMessageTo = function(event) {
-        console.log('connecting ' + this.id + ' and ' + event.id);
         this.to.push(event);
         event.from.push(this);
+        this.signal('messaged', this.id, event.id);
     };
 
     var Connector = function(){
@@ -98,13 +101,35 @@
         return result;
     }
 
+    var defaultMessageViewOptions = {};
+    var MessageView = function(origin, target, paper, options){
+        this.options = extend(options || {}, defaultMessageViewOptions);
+        this.origin = origin;
+        this.target = target;
+        this.paper = paper;
+        this.update();
+    };
+    MessageView.prototype.update = function(){
+        if (this._line){
+            this._line.remove();
+        }
 
+        var o = this.origin.circle();
+        var t = this.target.circle();
+        this._line = this.paper.path([
+            'M', o.attr('cx'), ',', o.attr('cy'),
+            'L', t.attr('cx'), ',', t.attr('cy')
+        ]);
+    };
+
+    var lookupEventView = {};
     var defaultEventViewOptions = {
 	    'fill': 'black',
 	    'radius': 5,
         'offset': 0.5
     };
     var EventView = function(event, paper, index, options){
+        lookupEventView[event.id] = this;
 	    this.options = extend(options || {}, defaultEventViewOptions);
 	    this.event = event;
 	    this.paper = paper;
@@ -112,6 +137,7 @@
 	    this.total = index + 1;
         this.cx = 0;
 	    this.update();
+        this.event.on('messaged',this.createMessageView.bind(this));
     };
     EventView.prototype.updateCx = function(cx){
         this.cx = cx;
@@ -141,6 +167,12 @@
     EventView.prototype.updateNumberOfSiblings = function(total){
 	    this.total = total;
 	    this.update();
+    };
+    EventView.prototype.createMessageView = function(originId, targetId){
+        var origin = lookupEventView[originId];
+        var target = lookupEventView[targetId];
+
+        new MessageView(origin, target, this.paper);
     };
 
     var defaultProcessViewOptions = {
