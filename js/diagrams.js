@@ -28,6 +28,17 @@
 	        new pwl.SystemView(system, container, { width: 640, height: 480 });
 	    }
     });
+    Reveal.addEventListener('diagram.happend-before', function(event){
+	    if (!isRendered[event.type]) {
+	        isRendered[event.type] = true;
+	        var container = document.getElementById('diagram.happend-before');
+            var happendBefore = new pwl.System();
+	        new pwl.SystemView(happendBefore, container, { width: 640, height: 480 });
+            var p = happendBefore.createProcess();
+            p.createEvent();
+            p.createEvent();
+	    }
+    });
 
     window.system = system;
 })(Reveal, pwl);

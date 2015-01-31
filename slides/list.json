@@ -9,9 +9,15 @@
         }
     },
     {
-	"filename": "diagram/introduction.html",
-	"attr": {
-	    "data-state": "diagram.introduction"
-	}
+        "filename": "diagram/introduction.html",
+        "attr": {
+            "data-state": "diagram.introduction"
+        }
+    },
+    {
+        "filename": "diagram/happend-before.html",
+        "attr": {
+            "data-state": "diagram.happend-before"
+        }
     }
 ]
