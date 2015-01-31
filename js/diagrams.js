@@ -29,23 +29,5 @@
 	    }
     });
 
-    var e = 101;
-    document.body.addEventListener('keypress', function(event){
-        if (event.charCode === e) {
-            var p = system.createProcess();
-            var q = system.createProcess();
-
-            var p1 = p.createEvent();
-            p.createEvent();
-            p.createEvent();
-
-            var q1 = q.createEvent();
-            q.createEvent();
-
-            pwl.connector.register(p1);
-            pwl.connector.register(q1);
-        }
-    });
-
     window.system = system;
 })(Reveal, pwl);
