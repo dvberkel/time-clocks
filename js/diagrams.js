@@ -23,24 +23,29 @@
 	        }
         });
     }
-    render('diagram.introduction', function(){
-	    var container = document.getElementById('diagram.introduction');
-	    container.addEventListener('mousedown', function(event){
-		    if (event.shiftKey) {
-		        system.createProcess();
-		    }
-	    });
+    var diagrams = {
+        'diagram.introduction': function(){
+	        var container = document.getElementById('diagram.introduction');
+	        container.addEventListener('mousedown', function(event){
+		        if (event.shiftKey) {
+		            system.createProcess();
+		        }
+	        });
 
-	    new pwl.SystemView(system, container, { width: 640, height: 480 });
-    });
-    render('diagram.happend-before', function(){
-	    var container = document.getElementById('diagram.happend-before');
-        var happendBefore = new pwl.System();
-	    new pwl.SystemView(happendBefore, container, { width: 640, height: 480 });
-        var p = happendBefore.createProcess();
-        p.createEvent();
-        p.createEvent();
-    });
+	        new pwl.SystemView(system, container, { width: 640, height: 480 });
+        },
+        'diagram.happend-before': function(){
+	        var container = document.getElementById('diagram.happend-before');
+            var happendBefore = new pwl.System();
+	        new pwl.SystemView(happendBefore, container, { width: 640, height: 480 });
+            var p = happendBefore.createProcess();
+            p.createEvent();
+            p.createEvent();
+        }
+    };
+    for (var id in diagrams) {
+        render(id, diagrams[id]);
+    }
 
     window.system = system;
 })(Reveal, pwl);
