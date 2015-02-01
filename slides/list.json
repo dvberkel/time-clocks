@@ -19,5 +19,11 @@
         "attr": {
             "data-state": "diagram.happend-before-1"
         }
+    },
+    {
+        "filename": "diagram/happend-before-2.html",
+        "attr": {
+            "data-state": "diagram.happend-before-2"
+        }
     }
 ]

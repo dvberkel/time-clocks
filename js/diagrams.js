@@ -41,6 +41,17 @@
             var p = happendBefore.createProcess();
             p.createEvent();
             p.createEvent();
+        },
+        'diagram.happend-before-2': function(){
+	        var container = document.getElementById('diagram.happend-before-2');
+            var happendBefore = new pwl.System();
+	        new pwl.SystemView(happendBefore, container, { width: 640, height: 480 });
+            var p = happendBefore.createProcess();
+            var p1 = p.createEvent();
+            p.createEvent();
+            var q = happendBefore.createProcess();
+            var q1 = q.createEvent();
+            p1.sendMessageTo(q1);
         }
     };
     for (var id in diagrams) {
