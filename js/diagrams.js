@@ -24,8 +24,8 @@
         });
     }
     var diagrams = {
-        'diagram.introduction': function(){
-	        var container = document.getElementById('diagram.introduction');
+        'diagram.introduction': function(id){
+	        var container = document.getElementById(id);
 	        container.addEventListener('mousedown', function(event){
 		        if (event.shiftKey) {
 		            system.createProcess();
@@ -34,16 +34,16 @@
 
 	        new pwl.SystemView(system, container, { width: 640, height: 480 });
         },
-        'diagram.happend-before-1': function(){
-	        var container = document.getElementById('diagram.happend-before-1');
+        'diagram.happend-before-1': function(id){
+	        var container = document.getElementById(id);
             var happendBefore = new pwl.System();
 	        new pwl.SystemView(happendBefore, container, { width: 640, height: 480 });
             var p = happendBefore.createProcess();
             p.createEvent();
             p.createEvent();
         },
-        'diagram.happend-before-2': function(){
-	        var container = document.getElementById('diagram.happend-before-2');
+        'diagram.happend-before-2': function(id){
+	        var container = document.getElementById(id);
             var happendBefore = new pwl.System();
 	        new pwl.SystemView(happendBefore, container, { width: 640, height: 480 });
             var p = happendBefore.createProcess();
@@ -53,8 +53,8 @@
             var q1 = q.createEvent();
             p1.sendMessageTo(q1);
         },
-        'diagram.happend-before-3': function(){
-	        var container = document.getElementById('diagram.happend-before-3');
+        'diagram.happend-before-3': function(id){
+	        var container = document.getElementById(id);
             var happendBefore = new pwl.System();
 	        new pwl.SystemView(happendBefore, container, { width: 640, height: 480 });
             var p = happendBefore.createProcess();
