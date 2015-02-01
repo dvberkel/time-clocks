@@ -34,8 +34,8 @@
 
 	        new pwl.SystemView(system, container, { width: 640, height: 480 });
         },
-        'diagram.happend-before': function(){
-	        var container = document.getElementById('diagram.happend-before');
+        'diagram.happend-before-1': function(){
+	        var container = document.getElementById('diagram.happend-before-1');
             var happendBefore = new pwl.System();
 	        new pwl.SystemView(happendBefore, container, { width: 640, height: 480 });
             var p = happendBefore.createProcess();

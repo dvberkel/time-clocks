@@ -15,9 +15,9 @@
         }
     },
     {
-        "filename": "diagram/happend-before.html",
+        "filename": "diagram/happend-before-1.html",
         "attr": {
-            "data-state": "diagram.happend-before"
+            "data-state": "diagram.happend-before-1"
         }
     }
 ]
