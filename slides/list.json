@@ -37,5 +37,11 @@
         "attr": {
             "data-state": "diagram.concurrent"
         }
+    },
+    {
+        "filename": "diagram/logical-clock.html",
+        "attr": {
+            "data-state": "diagram.logical-clock"
+        }
     }
 ]

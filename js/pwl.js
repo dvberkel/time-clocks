@@ -64,7 +64,7 @@
 
     var connector = pwl.connector = new Connector();
 
-    var Clock = function(start, increment) {
+    var Clock = pwl.Clock = function(start, increment) {
         this.timestamp = start || 0;
         this.increment = increment || 1;
     };
@@ -93,8 +93,8 @@
     };
     System.prototype = Object.create(Observable.prototype);
     System.prototype.constructor = System;
-    System.prototype.createProcess = function(){
-        var process = new Process(this);
+    System.prototype.createProcess = function(clock){
+        var process = new Process(this, clock);
         this.processes.push(process);
         this.signal('processCreated', process);
         return process;

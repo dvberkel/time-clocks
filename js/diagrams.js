@@ -40,7 +40,7 @@
 		        }
 	        });
 
-	        new pwl.SystemView(system, container, { width: 640, height: 480 });
+	        new pwl.SystemView(system, container, { 'width': 640, 'height': 480 });
         },
         'diagram.happend-before-1': function(id){
 	        var container = document.getElementById(id);
@@ -86,6 +86,15 @@
             var q2 = q.createEvent();
             p1.sendMessageTo(q2);
             q1.sendMessageTo(p2);
+        },
+        'diagram.logical-clock': function(id){
+	        var container = document.getElementById(id);
+            var happendBefore = new pwl.System();
+	        new pwl.SystemView(happendBefore, container, { 'width': 640, 'height': 480 });
+            var p = happendBefore.createProcess(new pwl.Clock(2, 3));
+            p.createEvent();
+            p.createEvent();
+            p.createEvent();
         }
     };
     for (var id in diagrams) {
