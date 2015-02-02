@@ -49,5 +49,11 @@
         "attr": {
             "data-state": "diagram.logical-clock-2"
         }
+    },
+    {
+        "filename": "diagram/logical-clock-3.html",
+        "attr": {
+            "data-state": "diagram.logical-clock-3"
+        }
     }
 ]

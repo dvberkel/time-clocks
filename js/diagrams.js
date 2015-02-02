@@ -107,7 +107,19 @@
             var q = happendBefore.createProcess(new pwl.Clock(1, 9));
             q.createEvent();
             q.createEvent();
-
+        },
+        'diagram.logical-clock-3': function(id){
+	        var container = document.getElementById(id);
+            var happendBefore = new pwl.System();
+	        new pwl.SystemView(happendBefore, container, { 'width': 640, 'height': 480 });
+            var p = happendBefore.createProcess(new pwl.Clock(2, 3));
+            var p1 = p.createEvent();
+            p.createEvent();
+            p.createEvent();
+            var q = happendBefore.createProcess(new pwl.Clock(3, 2));
+            var q1 = q.createEvent();
+            q.createEvent();
+            p1.sendMessageTo(q1);
         }
     };
     for (var id in diagrams) {
