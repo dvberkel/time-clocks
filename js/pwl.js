@@ -144,6 +144,7 @@
 	    'fill': 'black',
 	    'radius': 5,
         'offset': 0.5,
+        'showText': true,
         'text': {
             'fill': 'black',
             'size': 20,
@@ -181,11 +182,13 @@
 	        'cy': position,
 	        'cx': this.cx
 	    });
-        var text = this.text();
-        text.attr({
-            'x': this.cx + this.options.text.offset.dx,
-            'y': position + this.options.text.offset.dy
-        });
+        if (this.options.showText) {
+            var text = this.text();
+            text.attr({
+                'x': this.cx + this.options.text.offset.dx,
+                'y': position + this.options.text.offset.dy
+            });
+        }
         this.signal('moved');
     };
     EventView.prototype.circle = function(){
