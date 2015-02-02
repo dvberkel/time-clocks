@@ -25,9 +25,10 @@
 
     var eventIdGenerator = new IdGenerator();
 
-    var Event = function(){
+    var Event = function(process, timestamp){
         Observable.call(this);
         this.id = eventIdGenerator.next();
+        this.timestamp = timestamp;
         this.to = [];
         this.from = [];
     };
@@ -63,14 +64,24 @@
 
     var connector = pwl.connector = new Connector();
 
-    var Process = pwl.Process = function(){
+    var Clock = function(start, increment) {
+        this.timestamp = start || 0;
+        this.increment = increment || 1;
+    };
+    Clock.prototype.tick = function(){
+        this.timestamp += this.increment;
+        return this.timestamp;
+    };
+
+    var Process = pwl.Process = function(system, clock){
         Observable.call(this);
+        this.clock = clock || new Clock(0, 1);
         this.events = [];
     };
     Process.prototype = Object.create(Observable.prototype);
     Process.constructor = Process;
     Process.prototype.createEvent = function(){
-        var event = new Event(this);
+        var event = new Event(this, this.clock.tick());
 	    this.events.push(event);
         this.signal('eventCreated', event);
         return event;
@@ -132,7 +143,15 @@
     var defaultEventViewOptions = {
 	    'fill': 'black',
 	    'radius': 5,
-        'offset': 0.5
+        'offset': 0.5,
+        'text': {
+            'fill': 'black',
+            'size': 20,
+            'offset': {
+                'dx': 20,
+                'dy': 5
+            }
+        }
     };
     var EventView = function(event, paper, index, options){
         Observable.call(this);
@@ -162,6 +181,11 @@
 	        'cy': position,
 	        'cx': this.cx
 	    });
+        var text = this.text();
+        text.attr({
+            'x': this.cx + this.options.text.offset.dx,
+            'y': position + this.options.text.offset.dy
+        });
         this.signal('moved');
     };
     EventView.prototype.circle = function(){
@@ -172,10 +196,24 @@
 		        this.options.radius
 	        );
 	        circle.attr({
-		        'fill': this.options.fill
+		        'fill': this.options.fill,
 	        });
 	    }
 	    return this._circle;
+    };
+    EventView.prototype.text = function(){
+        if (!this._text){
+            var text = this._text = this.paper.text(
+                0,
+                0,
+                this.event.timestamp
+            );
+            text.attr({
+                'fill': this.options.text.fill,
+                'font-size': this.options.text.size
+            });
+        }
+        return this._text;
     };
     EventView.prototype.updateNumberOfSiblings = function(total){
 	    this.total = total;

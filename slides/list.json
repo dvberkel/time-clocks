@@ -31,5 +31,11 @@
         "attr": {
             "data-state": "diagram.happend-before-3"
         }
+    },
+    {
+        "filename": "diagram/concurrent.html",
+        "attr": {
+            "data-state": "diagram.concurrent"
+        }
     }
 ]
