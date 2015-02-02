@@ -69,8 +69,9 @@
         this.increment = increment || 1;
     };
     Clock.prototype.tick = function(){
+        var result = this.timestamp;
         this.timestamp += this.increment;
-        return this.timestamp;
+        return result;
     };
 
     var Process = pwl.Process = function(system, clock){
