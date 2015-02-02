@@ -37,7 +37,14 @@
         'diagram.happend-before-1': function(id){
 	        var container = document.getElementById(id);
             var happendBefore = new pwl.System();
-	        new pwl.SystemView(happendBefore, container, { width: 640, height: 480 });
+	        new pwl.SystemView(happendBefore, container, {
+                'width': 640, 'height': 480,
+                'processViewOptions': {
+                    'eventViewOptions': {
+                        'showText': false
+                    }
+                }
+            });
             var p = happendBefore.createProcess();
             p.createEvent();
             p.createEvent();
@@ -45,7 +52,14 @@
         'diagram.happend-before-2': function(id){
 	        var container = document.getElementById(id);
             var happendBefore = new pwl.System();
-	        new pwl.SystemView(happendBefore, container, { width: 640, height: 480 });
+	        new pwl.SystemView(happendBefore, container, {
+                'width': 640, 'height': 480,
+                'processViewOptions': {
+                    'eventViewOptions': {
+                        'showText': false
+                    }
+                }
+            });
             var p = happendBefore.createProcess();
             var p1 = p.createEvent();
             p.createEvent();
@@ -56,7 +70,14 @@
         'diagram.happend-before-3': function(id){
 	        var container = document.getElementById(id);
             var happendBefore = new pwl.System();
-	        new pwl.SystemView(happendBefore, container, { width: 640, height: 480 });
+	        new pwl.SystemView(happendBefore, container, {
+                'width': 640, 'height': 480,
+                'processViewOptions': {
+                    'eventViewOptions': {
+                        'showText': false
+                    }
+                }
+            });
             var p = happendBefore.createProcess();
             var p1 = p.createEvent();
             p.createEvent();
@@ -69,7 +90,14 @@
         'diagram.concurrent': function(id){
 	        var container = document.getElementById(id);
             var happendBefore = new pwl.System();
-	        new pwl.SystemView(happendBefore, container, { width: 640, height: 480 });
+	        new pwl.SystemView(happendBefore, container, {
+                'width': 640, 'height': 480,
+                'processViewOptions': {
+                    'eventViewOptions': {
+                        'showText': false
+                    }
+                }
+            });
             var p = happendBefore.createProcess();
             var p1 = p.createEvent();
             var p2 = p.createEvent();
