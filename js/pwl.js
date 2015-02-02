@@ -105,7 +105,7 @@
         Array.prototype.slice.call(arguments).forEach(function(argument){
             for (var key in argument) {
                 if (argument.hasOwnProperty(key)) {
-                    result[key] = result[key] || argument[key];
+                    result[key] = result[key] !== undefined ? result[key]: argument[key];
                 }
             }
         });
