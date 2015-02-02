@@ -39,9 +39,9 @@
         }
     },
     {
-        "filename": "diagram/logical-clock.html",
+        "filename": "diagram/logical-clock-1.html",
         "attr": {
-            "data-state": "diagram.logical-clock"
+            "data-state": "diagram.logical-clock-1"
         }
     }
 ]

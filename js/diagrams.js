@@ -87,7 +87,7 @@
             p1.sendMessageTo(q2);
             q1.sendMessageTo(p2);
         },
-        'diagram.logical-clock': function(id){
+        'diagram.logical-clock-1': function(id){
 	        var container = document.getElementById(id);
             var happendBefore = new pwl.System();
 	        new pwl.SystemView(happendBefore, container, { 'width': 640, 'height': 480 });
