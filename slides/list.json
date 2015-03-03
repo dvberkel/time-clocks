@@ -71,5 +71,6 @@
     "resource/shared-resource.md",
     "resource/problem.md",
     "resource/assumptions.md",
-    "resource/setup.md"
+    "resource/setup.md",
+    "resource/algorithm.md"
 ]
