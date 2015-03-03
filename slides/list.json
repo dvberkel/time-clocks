@@ -68,5 +68,6 @@
             "data-state": "diagram.total-ordering"
         }
     },
-    "resource/shared-resource.md"
+    "resource/shared-resource.md",
+    "resource/problem.md"
 ]
