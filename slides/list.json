@@ -70,5 +70,6 @@
     },
     "resource/shared-resource.md",
     "resource/problem.md",
-    "resource/assumptions.md"
+    "resource/assumptions.md",
+    "resource/setup.md"
 ]
