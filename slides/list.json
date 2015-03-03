@@ -61,5 +61,11 @@
         "attr": {
             "data-state": "diagram.logical-clock-4"
         }
+    },
+    {
+        "filename": "diagram/total-ordering.html",
+        "attr": {
+            "data-state": "diagram.total-ordering"
+        }
     }
 ]
