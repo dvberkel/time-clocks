@@ -67,5 +67,6 @@
         "attr": {
             "data-state": "diagram.total-ordering"
         }
-    }
+    },
+    "resource/shared-resource.md"
 ]
