@@ -1,4 +1,4 @@
-##  Assumptions
+##  Properties
 
 1. Messages from P to Q are received in order <!-- .element class="fragment" -->
 2. Messages are eventually received <!-- .element class="fragment" -->
